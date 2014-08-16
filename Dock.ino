@@ -28,8 +28,6 @@ void setup() {
   Serial.begin(57600);
 }
 
-// On startup, the serial port will print "remove object" until an object is initially added
-// After initial object detection, it will continuosly print the last command called  
 void loop() {
   for (int pin=0; pin < 5; pin++)
   {
@@ -47,27 +45,27 @@ void loop() {
       prevValues[pin] = values[pin]; // save current values
       values[pin] = reading;        // update currently read value
     }
-    else if (value < 1000 && pin < 4) 
+    
+    if (value < 1000 && pin < 4) 
     {
       Serial.print("add object ");
-      type = checkType(value, type);
-      Serial.println(type);    
+      type = checkType(value, type);     
+      Serial.println(type);       
     } 
-    else if (value > 1000 && pin < 4) 
-    {
-      Serial.print("remove object ");
-      type = checkType(prevValue, type);
-      Serial.println(type);   
-    }
+   
+//    else if (value > 1000 && pin < 4) 
+//    {
+//      Serial.print("remove object ");
+//      type = checkType(prevValue, type);      
+//    }
+
     else if (value < 1000 && pin == 4)
     {
       Serial.print("set bg ");
       type = checkType(value, type);
-      Serial.println(type);
-    } 
+      Serial.println(type);       
+    }      
   } 
-  delay(500);
-  Serial.println("--------------------");
 }
 
 String checkType(int value, String type) {
