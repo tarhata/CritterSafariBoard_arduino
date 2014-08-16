@@ -5,7 +5,7 @@
  * MHCID Capstone 2014
  *
  **/
- 
+
 
 // Object and Background Pieces
 #define OBJECT1 A0
@@ -26,6 +26,7 @@ String type = "";
 
 void setup() {  
   Serial.begin(57600);
+  Serial.println("Starting...");
 }
 
 void loop() {
@@ -37,35 +38,42 @@ void loop() {
     int value = values[pin];
     int prevValue = prevValues[pin];
 
-    int minReading = reading - range;
-    int maxReading = reading + range;
+    int minReading = value - range;
+    int maxReading = value + range;
 
-    if (value > maxReading || value < minReading)
+    if (reading > maxReading || reading < minReading)
     {
-      prevValues[pin] = values[pin]; // save current values
-      values[pin] = reading;        // update currently read value
+      if (reading < 1000 && pin < 4) 
+      {
+        Serial.print("add object ");
+        type = checkType(reading, type);     
+        Serial.println(type);       
+      } 
+      else if (reading > 1000 && pin < 4) 
+      {
+        Serial.print("remove object ");
+        type = checkType(value, type);  
+        Serial.println(type);    
+      }
+      else if (reading < 1000 && pin == 4)
+      {
+        Serial.print("set bg ");
+        type = checkType(reading, type);
+        Serial.println(type);       
+      }         
     }
-    
-    if (value < 1000 && pin < 4) 
-    {
-      Serial.print("add object ");
-      type = checkType(value, type);     
-      Serial.println(type);       
-    } 
-   
-//    else if (value > 1000 && pin < 4) 
-//    {
-//      Serial.print("remove object ");
-//      type = checkType(prevValue, type);      
-//    }
-
-    else if (value < 1000 && pin == 4)
-    {
-      Serial.print("set bg ");
-      type = checkType(value, type);
-      Serial.println(type);       
-    }      
-  } 
+    prevValues[pin] = values[pin]; // save current values
+    values[pin] = reading;        // update currently read value      
+    delay(5);
+  }
+  
+  //check current readings
+//  Serial.print("Current readings = ");  
+//  for (int pin = 0; pin<5; pin++) {
+//    Serial.print(values[pin]);
+//    Serial.print(" ");
+//  }
+//  Serial.println();
 }
 
 String checkType(int value, String type) {
@@ -88,9 +96,12 @@ String checkType(int value, String type) {
     type = "space";
   } 
   else if (value > 1000)
-  { type = "";
+  { 
+    type = "";
   }
   return type;
 }
+
+
 
 
