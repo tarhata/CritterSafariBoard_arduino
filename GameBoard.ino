@@ -144,6 +144,7 @@ void loop() {
       }
     }   
 
+    Serial.print("start-");
     // count how many sequential step blocks are present; ignore any  after an empty space   
     for (int pin = 0; pin < functionPins; pin++) {
       int value = functionValues[pin];
@@ -156,7 +157,7 @@ void loop() {
     }         
 
     // print step values
-    Serial.println(numSteps);
+    Serial.print(numSteps);
     for (int pin=0; pin < numSteps; pin++)
     {
       int value = stepsValues[pin];
@@ -165,25 +166,30 @@ void loop() {
       {
         functionFound = true;
       }        
-      Serial.println(type);    
+      Serial.print("-");   
+     Serial.print(type); 
     }
 
     // print function values
 
     if (functionFound == true) 
     {
-      Serial.println(numFunction);
+      Serial.print("-");
+      Serial.print(numFunction);
       for (int pin=0; pin < numFunction; pin++)
       {
         int value = functionValues[pin];
         type = checkType(value, type);
-        Serial.println(type);   
+        Serial.print("-");
+        Serial.print(type);   
       }
     } 
     else {
-      Serial.println("0");
+      Serial.print("-0");
     }
-
+    
+    Serial.println();
+    
     //turn off function LEDs
     for (int ledPin=6; ledPin<10; ledPin++)
     {
@@ -195,8 +201,6 @@ void loop() {
     numFunction = 0;    
     functionFound = false;
     delay(1000);      
-
-    Serial.println("******************");
   }
 
   // Button not pressed. Read game block values from STEPS and FUNCTION rows
