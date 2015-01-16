@@ -1,4 +1,4 @@
 CritterSafariBoard_arduino
 ==========================
 
-Arduino code for Critter Safari Game Board
+Arduino code for Critter Safari game board and dock.
