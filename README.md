@@ -1,11 +1,11 @@
 CritterSafariBoard_arduino
 ==========================
 
-![Concept]
-(https://github.com/parano/CritterSafari/raw/master/readmeImages/game_overview.png)
+![Critter Safari Logo](https://github.com/parano/CritterSafari/raw/master/readmeImages/critter_safari_logo.png)
 
-![Functional prototype]
-https://github.com/parano/CritterSafari/raw/master/readmeImages/functional_prototype.png
+![Concept](https://github.com/parano/CritterSafari/raw/master/readmeImages/game_overview.png)
+
+![Functional prototype](https://github.com/parano/CritterSafari/raw/master/readmeImages/functional_prototype.png)
 
 Arduino code for the functional prototype of the Critter Safari game board and dock. Critter Safari is game that teaches children fundamental computational thinking skills. It pairs an app with a physical block programming interface. The game was designed as a way to expose young girls to computer science skills.
 
